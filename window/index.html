@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; img-src *"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Loudred bot</title>
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="./renderer.js"></script>
+  </head>
+
+  <body>
+    <div class="layout">
+      <div class="topbar">
+        <p id="prevTrackButton" class="twemoji topbar_elem topbar_button">⏮</p>
+        <p id="playpausebutton" class="twemoji topbar_elem topbar_button">▶️</p>
+        <p id="nextTrackButton" class="twemoji topbar_elem topbar_button">⏭️</p>
+        <input
+          id="tokenbar"
+          class="topbar_elem"
+          type="text"
+          placeholder="Paste your token here"
+        />
+        <div id="mediabar" class="display_none">
+          <div
+            id="mediaPleaseWait"
+            class="mediaSingleBar mediatopbar display_none"
+          >
+            <p class="mediainfo">Please Wait...</p>
+          </div>
+          <div id="mediaTopBar" class="mediatopbar">
+            <p id="mediastarttime" class="mediainfo">0</p>
+            <p id="mediaPlayerStatus" class="mediainfo">Not Started</p>
+            <p id="mediatitle">Playback will start if a guild and a channel are selected and a track is added to the queue</p>
+            <p id="mediaConnectionStatus" class="mediainfo">Unavaliable</p>
+            <p id="mediaendtime" class="mediainfo">0</p>
+          </div>
+          <div id="mediaProgressContainer" class="mediaprogresscontainer">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="slider"
+              id="mediaprogressbar"
+            />
+          </div>
+        </div>
+        <p id="repeatTrackButton" class="twemoji topbar_elem topbar_button">
+          🔁
+        </p>
+      </div>
+      <div id="maincontentbox">
+        <div class="sidebar" id="channelbar">
+          <div class="guilddropdown">
+            <button class="dropdownbutton">GUILD</button>
+            <div id="guildslist" class="dropdown-content">
+              <div class="dropdownitem">
+                <p>Nobody here but us chickens.</p>
+              </div>
+            </div>
+          </div>
+          <ol id="channellist" class="channellist">
+          </ol>
+        </div>
+        <div id="mainpanel">
+          <div class="mainPanelContainer">
+            <input
+              id="searchbar"
+              type="text"
+              placeholder="Insert valid URL or youtube search"
+            />
+          </div>
+          <div class="mainPanelContainer display_none">
+            <p class="mainPanelContainerButton" id="addAllButton">Add All</p>
+          </div>
+          <div class="resultcontainer">
+            <ol id="resultlist">
+            </ol>
+          </div>
+        </div>
+        <div class="sidebar" id="queuebar">
+          <ol class="tracklist" id="tracklist">
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

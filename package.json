@@ -1,0 +1,20 @@
+{
+  "name": "loudred-bot",
+  "version": "1.0.0",
+  "description": "A discord sound player",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc; lessc window/index.less window/index.css",
+    "start": "electron ."
+  },
+  "author": "Lucius Macarini",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^22.0.0"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.14.0",
+    "discord.js": "^14.7.1",
+    "sodium": "^3.0.2"
+  }
+}

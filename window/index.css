@@ -1,0 +1,404 @@
+@font-face {
+  font-family: "Roboto Mono";
+  src: url(assets/Roboto/static/RobotoMono-Regular.ttf);
+}
+@font-face {
+  font-family: twemoji;
+  src: url(assets/twemoji.ttf);
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-color: #1e1e1e;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.topbar {
+  background-color: #00b75c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5rem;
+}
+.inputitem {
+  border: none;
+  outline: 0;
+  font-family: "Roboto Mono";
+}
+#tokenbar {
+  border: none;
+  outline: 0;
+  font-family: "Roboto Mono";
+  cursor: default;
+  font-size: 19px;
+  width: 100%;
+}
+#tokenbar::placeholder {
+  color: #474747;
+}
+.topbar_elem {
+  border-radius: 10px;
+  margin: 6px;
+  padding: 11px;
+  background-color: #1eff8f;
+}
+.twemoji {
+  font-family: twemoji;
+}
+.topbar_button {
+  font-size: 30px;
+  cursor: default;
+  user-select: none;
+}
+.topbar_button:hover {
+  background-color: #51ffa8;
+}
+.display_none {
+  display: none !important;
+}
+.display_flex {
+  display: flex;
+}
+#mediabar {
+  width: 100%;
+  padding: 0;
+  flex-direction: column;
+  margin: 6px;
+  user-select: none;
+}
+#mediabar .element {
+  width: 100%;
+  height: 100%;
+}
+.mediatopbar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #1eff8f;
+  padding: 6px 0;
+}
+.mediatopbar p {
+  margin: 0;
+  text-align: center;
+  font-family: "Roboto Mono";
+  color: #474747;
+}
+.mediainfo {
+  padding: 3px;
+  background-color: #84ffc2;
+  border-radius: 5px;
+  margin: 0 0.5rem;
+}
+.mediaprogresscontainer {
+  width: 100%;
+  height: 100%;
+}
+.mediaprogresscontainer input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  background-color: #008442;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 0px;
+}
+.mediaprogresscontainer input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #1eff8f;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 30px;
+  width: 2rem;
+}
+#maincontentbox {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #262626;
+  width: 14rem;
+  min-width: 14rem;
+  overflow: auto;
+}
+#channelbar {
+  left: 0;
+}
+.contentfont {
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+}
+.guilddropdown .dropdownbutton {
+  width: 100%;
+  padding: 5px;
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+  font-size: 20px;
+  background-color: #262626;
+  border: 0;
+  border-bottom: 2px solid dimgray;
+}
+.guilddropdown .dropdownbutton::after {
+  content: "";
+  position: absolute;
+  margin-left: 22px;
+  border-bottom: 4px solid #bbbbbb;
+  border-right: 4px solid #bbbbbb;
+  height: 1rem;
+  width: 1rem;
+  rotate: 45deg;
+}
+.guilddropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: #262626;
+  border: 5px solid #00b75c;
+  border-radius: 10px;
+  width: 30rem;
+}
+.guilddropdown .dropdown-content p {
+  padding: 10px;
+}
+.guilddropdown:hover .dropdown-content {
+  display: block;
+}
+.guilddropdown .dropdownitem {
+  background-color: #3b3b3b;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  user-select: none;
+}
+.guilddropdown .dropdownitem p {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+  overflow: hidden;
+  white-space: nowrap;
+}
+.guilddropdown .dropdownitem img {
+  width: auto;
+  height: 100%;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+.channellistitem {
+  margin: 0;
+  font-family: "Roboto Mono";
+  font-size: 100%;
+  user-select: none;
+}
+.channellist {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style-type: none;
+}
+.channellist li {
+  background-color: #3b3b3b;
+  border-radius: 10px;
+  margin: 5px;
+}
+.channellist .channellistchannel {
+  margin: 0;
+  font-family: "Roboto Mono";
+  font-size: 100%;
+  user-select: none;
+  padding: 6px;
+  color: #bbbbbb;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.channellist .channellistchannel::before {
+  content: "🔊";
+  margin-right: 5px;
+}
+.channellist .channellistseparator {
+  margin: 0;
+  font-family: "Roboto Mono";
+  font-size: 100%;
+  user-select: none;
+  border-radius: 0px;
+  background-color: #262626;
+  color: dimgray;
+  text-align: center;
+  border-bottom: 2px solid dimgray;
+}
+#mainpanel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.mainPanelContainer {
+  display: flex;
+  top: 0;
+  height: 4rem;
+  width: 100%;
+  align-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.mainPanelContainerButton {
+  font-family: "Roboto Mono";
+  user-select: none;
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: #00b75c;
+}
+#searchbar {
+  background-color: #3b3b3b;
+  width: 70%;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  outline: 0;
+  font-family: "Roboto Mono";
+  color: #bbbbbb;
+  font-size: 16px;
+}
+.resultcontainer {
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+}
+#resultlist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  flex-direction: column;
+  align-content: center;
+  margin: 0;
+}
+#resultlist li {
+  background-color: #3b3b3b;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  max-width: 80%;
+  overflow: hidden;
+}
+.resultlistitem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 7rem;
+  user-select: none;
+}
+.resultlistitem img {
+  height: 100%;
+  width: auto;
+  margin-right: 8px;
+  border-radius: 10px;
+}
+.resultlistitem h1 {
+  font-size: 20px;
+}
+.resultlistitem .resultlistitemtext {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.resultlistitem .resultlistitemtext * {
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+  margin: 0;
+  margin-bottom: 5px;
+}
+.resultlistitem:hover .resultlistItemAddButton {
+  display: initial;
+}
+.resultlistitem .resultlistItemAddButton {
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+  font-size: 3rem;
+  margin-right: 10px;
+  display: none;
+}
+#queuebar {
+  right: 0;
+}
+.tracklist {
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+  height: 100%;
+}
+.track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #3b3b3b;
+  border-radius: 10px;
+  user-select: none;
+  margin-bottom: 5px;
+}
+.track .trackHover {
+  display: none;
+}
+.track:hover .trackHover {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.track:hover .trackHover #currentlyPlaying {
+  font-family: "Roboto Mono";
+  color: dimgray;
+}
+.track p {
+  color: #bbbbbb;
+  font-family: "Roboto Mono";
+  margin: 0;
+  margin-bottom: 5px;
+}
+.track img {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+.mediaSingleBar {
+  border-radius: 10px !important;
+}
+.channellist .channelListItemSelected {
+  background-color: #00b75c;
+  border-radius: 10px;
+  margin: 5px;
+}
+.channellist .channelListItemSelected p {
+  color: initial;
+}
+#repeatTrackButton.repeatTrackButtonOn {
+  background-color: #005129;
+}
