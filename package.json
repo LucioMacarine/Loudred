@@ -9,7 +9,12 @@
     "dist": "electron-builder",
     "start": "electron ."
   },
-  "author": "Lucius Macarini",
+  "author": {
+    "email": "94476320+Lucius-Macarini@users.noreply.github.com",
+    "name": "Lucius Macarini",
+    "url": "https://github.com/Lucius-Macarini"
+  },
+  "homepage": "https://github.com/Lucius-Macarini/Loudred",
   "license": "UNLICENSED",
   "devDependencies": {
     "electron": "^22.0.0"
@@ -44,15 +49,9 @@
           "arch": [
             "x64"
           ]
-        },
-        {
-          "target": "rpm",
-          "arch": [
-            "x64"
-          ]
         }
       ],
-      "icon": "icon.ico",
+      "icon": "icon.png",
       "synopsis": "A discord sound player",
       "category": "Audio"
     },
