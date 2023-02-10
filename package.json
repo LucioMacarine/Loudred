@@ -1,10 +1,10 @@
 {
   "name": "loudred-bot",
   "version": "1.0.0",
-  "description": "A discord sound player",
+  "description": "A Discord sound player",
   "main": "index.js",
   "scripts": {
-    "build": "tsc; lessc window/index.less window/index.css",
+    "build": "npx tsc; npx lessc window/index.less window/index.css",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "start": "electron ."
@@ -15,9 +15,11 @@
     "url": "https://github.com/Lucius-Macarini"
   },
   "homepage": "https://github.com/Lucius-Macarini/Loudred",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "^22.0.0"
+    "electron": "^22.0.0",
+    "less": "^4.1.3",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "@discordjs/voice": "^0.14.0",

@@ -1,5 +1,5 @@
 /*
-    Loudred Bot - A discord music bot.
+    Loudred Bot - A Discord sound player.
     Copyright (C) 2023  Lucio Macarine
 
     This program is free software: you can redistribute it and/or modify
@@ -261,6 +261,22 @@ async function loadguilds() {
     };
     guildlist.appendChild(wrapperdiv);
   });
+
+  //Add invite link
+  const inviteContainer = fabricateElement('<div class="dropdownitem"></div>');
+  const inviteButton = fabricateElement(
+    '<p class="inviteLinkButton">Invite bot</p>'
+  );
+  inviteButton.onclick = async () => {
+    selectavision.open_link(await createInviteLink());
+  };
+  inviteContainer.appendChild(inviteButton);
+  guildlist.appendChild(inviteContainer);
+}
+
+async function createInviteLink() {
+  const client = await selectavision.get_client_info();
+  return `https://discord.com/api/oauth2/authorize?client_id=${client.id}&permissions=3145728&scope=bot`;
 }
 
 function clearGuilds() {

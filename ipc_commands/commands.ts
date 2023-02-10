@@ -1,5 +1,5 @@
 /*
-    Loudred Bot - A discord music bot.
+    Loudred Bot - A Discord sound player.
     Copyright (C) 2023  Lucio Macarine
 
     This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ import {
   TextChannel,
   BaseGuildTextChannel,
   GuildChannelTypes,
+  ClientUser,
 } from "discord.js";
 
 export function get_guilds(client: Client): Guild[] {
@@ -41,4 +42,10 @@ export function get_channels(client: Client, id: string): Channel[] {
     });
   });
   return channels;
+}
+
+export function get_client_info(client: Client): ClientUser {
+  if (client.user === null || undefined)
+    throw new Error("Client User not avaliable");
+  return client.user;
 }

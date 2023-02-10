@@ -1,5 +1,5 @@
 /*
-    Loudred Bot - A discord music bot.
+    Loudred Bot - A Discord sound player.
     Copyright (C) 2023  Lucio Macarine
 
     This program is free software: you can redistribute it and/or modify
@@ -49,4 +49,6 @@ contextBridge.exposeInMainWorld("selectavision", {
   queue_change_settings: (settings: queueSettings) =>
     ipcRenderer.invoke("queue_change_settings", settings),
   window_alert: (callback: any) => ipcRenderer.on("window_alert", callback),
+  get_client_info: () => ipcRenderer.invoke("get_client_info"),
+  open_link: (link: string) => ipcRenderer.invoke("open_link", link),
 });

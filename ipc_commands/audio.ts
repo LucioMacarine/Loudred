@@ -1,5 +1,5 @@
 /*
-    Loudred Bot - A discord music bot.
+    Loudred Bot - A Discord sound player.
     Copyright (C) 2023  Lucio Macarine
 
     This program is free software: you can redistribute it and/or modify

@@ -1,5 +1,5 @@
 /*
-    Loudred Bot - A discord music bot.
+    Loudred Bot - A Discord sound player.
     Copyright (C) 2023  Lucio Macarine
 
     This program is free software: you can redistribute it and/or modify
@@ -16,10 +16,14 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { app, BrowserWindow, ipcMain, ipcRenderer } from "electron";
+import { app, BrowserWindow, ipcMain, ipcRenderer, shell } from "electron";
 import * as path from "path";
 
-import { get_channels, get_guilds } from "./ipc_commands/commands";
+import {
+  get_channels,
+  get_client_info,
+  get_guilds,
+} from "./ipc_commands/commands";
 import { Audio, AudioTools } from "./ipc_commands/audio";
 
 import {
@@ -124,6 +128,14 @@ ipcMain.handle("get_guilds", (e) => {
 
 ipcMain.handle("get_video_metadata", (e, query) => {
   return AudioTools.getMetadata(query);
+});
+
+ipcMain.handle("get_client_info", (e, query) => {
+  return get_client_info(dcclient);
+});
+
+ipcMain.handle("open_link", (e, link) => {
+  shell.openExternal(link);
 });
 
 ipcMain.handle("player_change_settings", (e, settings) => {
