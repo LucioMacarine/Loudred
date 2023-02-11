@@ -31,7 +31,8 @@
     "productName": "Loudred Bot",
     "win": {
       "target": "nsis",
-      "icon": "icon.ico"
+      "icon": "icon.ico",
+      "publish": "github"
     },
     "nsis": {
       "oneClick": false,
@@ -55,7 +56,8 @@
       ],
       "icon": "icon.png",
       "synopsis": "A discord sound player",
-      "category": "Audio"
+      "category": "Audio",
+      "publish": "github"
     },
     "pacman": {
       "depends": [
