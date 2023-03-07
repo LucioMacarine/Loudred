@@ -58,7 +58,10 @@ app.whenReady().then(() => {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-  window.loadFile("./window/index.html");
+  window.loadFile("./window/boots.html");
+  () => {
+    window.loadFile("./window/index.html");
+  };
 });
 
 ipcMain.handle("change_channel", (e, channelId: string) => {

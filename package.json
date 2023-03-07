@@ -4,7 +4,7 @@
   "description": "A Discord sound player",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc; npx lessc window/index.less window/index.css",
+    "build": "npx tsc; npx lessc window/index.less window/index.css; npx lessc window/boots.less window/boots.css",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "start": "electron ."
@@ -24,7 +24,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.14.0",
     "discord.js": "^14.7.1",
-    "libsodium": "^0.7.11"
+    "sodium-native": "^3.0.2"
   },
   "build": {
     "appId": "com.loudred.bot",
