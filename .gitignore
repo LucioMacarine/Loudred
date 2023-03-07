@@ -4,4 +4,5 @@ node_modules
 package-lock.json
 dist
 *.js
+pnpm-lock.yaml
 !window/*.js
