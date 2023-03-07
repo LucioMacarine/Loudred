@@ -17,6 +17,7 @@
   "homepage": "https://github.com/Lucius-Macarini/Loudred",
   "license": "GPL-3.0",
   "devDependencies": {
+    "@types/node-fetch": "^2.6.2",
     "electron": "^22.0.0",
     "less": "^4.1.3",
     "typescript": "^4.9.5"
@@ -24,7 +25,12 @@
   "dependencies": {
     "@discordjs/voice": "^0.14.0",
     "discord.js": "^14.7.1",
-    "sodium": "^3.0.2"
+    "filereader": "^0.10.3",
+    "node-fetch": "^2.6.9",
+    "peerjs": "^2.0.0-beta.3",
+    "sodium": "^3.0.2",
+    "wrtc": "^0.4.7",
+    "ws": "^8.12.0"
   },
   "build": {
     "appId": "com.loudred.bot",

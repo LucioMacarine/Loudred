@@ -37,6 +37,7 @@ import {
 
 import { Queue } from "./ipc_commands/queue";
 import { queueSettings, trackMetadata, trackStatus } from "./types";
+import { p2p_daemon } from "./p2p";
 
 const dcclient = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
@@ -47,6 +48,8 @@ let audio: Audio;
 let queue: Queue;
 
 let guild: Guild;
+
+let p2pd: p2p_daemon;
 
 let window: BrowserWindow;
 
@@ -59,14 +62,30 @@ app.whenReady().then(() => {
     },
   });
   window.loadFile("./window/index.html");
+  p2pd = new p2p_daemon(window);
 });
+
+//TODO don't
+//#region p2p
+
+export function euvoumematar(channel: string, message: any) {
+  window.webContents.send("p2p_incoming_invoke", channel, message);
+}
+
+ipcMain.handle("p2p_start", (e, id: string) => {
+  p2pd.connect(id);
+});
+
+//#endregion
 
 ipcMain.handle("change_channel", (e, channelId: string) => {
   audio.ChangeChannel(channelId);
 });
 
 ipcMain.handle("change_guild", (e, guildId) => {
+  console.log(guildId);
   audio?.destroy();
+  console.error(dcclient.guilds.cache.get(guildId));
   audio = new Audio(dcclient, guildId, (trackStatus: trackStatus) =>
     sendTrackUpdate(trackStatus)
   );
