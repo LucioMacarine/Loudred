@@ -24,7 +24,8 @@
   "dependencies": {
     "@discordjs/voice": "^0.14.0",
     "discord.js": "^14.7.1",
-    "sodium-native": "^3.0.2"
+    "sodium-native": "^3.4.1",
+    "yt-dlp-wrap-plus": "^2.3.16"
   },
   "build": {
     "appId": "com.loudred.bot",
