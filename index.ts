@@ -73,6 +73,8 @@ app.whenReady().then(() => {
       await YTDlpWrap.downloadFromGithub();
     }
 
+    ytdl = new YTDlpWrap();
+
     window.loadFile("./window/index.html");
   };
   runpls();

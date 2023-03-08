@@ -93,9 +93,13 @@ export class AudioTools {
 
   static async getMetadata(query: string): Promise<trackMetadata[]> {
     const filteredQuery = query.replace("'", "");
-    const { stdout, stderr } = await exec(
-      `yt-dlp --yes-playlist --flat-playlist --print pre_process:\'{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration)j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}\' '${filteredQuery}'`
-    );
+    const stdout = await ytdl.execPromise([
+      "--yes-playlist",
+      "--flat-playlist",
+      "--print",
+      `pre_process:{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration)j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}`,
+      filteredQuery,
+    ]);
     const videos = stdout.trim().split(/\r\n|\r|\n/);
     let jsonvideos: trackMetadata[] = [];
     videos.forEach((video: string) => {
