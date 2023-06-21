@@ -18,6 +18,7 @@
 
 import { app, BrowserWindow, ipcMain, ipcRenderer, shell } from "electron";
 import * as path from "path";
+import * as fs from "fs";
 
 import {
   get_channels,
@@ -38,6 +39,8 @@ import {
 import { Queue } from "./ipc_commands/queue";
 import { queueSettings, trackMetadata, trackStatus } from "./types";
 
+import YTDlpWrap from "yt-dlp-wrap-plus";
+
 const dcclient = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
 });
@@ -50,6 +53,8 @@ let guild: Guild;
 
 let window: BrowserWindow;
 
+export let ytdl: YTDlpWrap;
+
 app.whenReady().then(() => {
   window = new BrowserWindow({
     width: 800,
@@ -58,7 +63,21 @@ app.whenReady().then(() => {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-  window.loadFile("./window/index.html");
+
+  window.loadFile("./window/boots.html");
+
+  const runpls = async () => {
+    //ytdl download
+    if (!(fs.existsSync("yt-dlp") || fs.existsSync("yt-dlp.exe"))) {
+      await YTDlpWrap.getGithubReleases(1, 5);
+      await YTDlpWrap.downloadFromGithub();
+    }
+
+    ytdl = new YTDlpWrap();
+
+    window.loadFile("./window/index.html");
+  };
+  runpls();
 });
 
 ipcMain.handle("change_channel", (e, channelId: string) => {

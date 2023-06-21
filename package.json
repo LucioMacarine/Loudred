@@ -4,17 +4,17 @@
   "description": "A Discord sound player",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc; npx lessc window/index.less window/index.css",
+    "build": "npx tsc; npx lessc window/index.less window/index.css; npx lessc window/boots.less window/boots.css",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "start": "electron ."
   },
   "author": {
-    "email": "94476320+Lucius-Macarini@users.noreply.github.com",
-    "name": "Lucius Macarini",
-    "url": "https://github.com/Lucius-Macarini"
+    "email": "1342952LucioMacarine@protonmail.com",
+    "name": "Lúcio Macarine",
+    "url": "https://github.com/LucioMacarine"
   },
-  "homepage": "https://github.com/Lucius-Macarini/Loudred",
+  "homepage": "https://github.com/LucioMacarine/Loudred",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^22.0.0",
@@ -24,7 +24,8 @@
   "dependencies": {
     "@discordjs/voice": "^0.14.0",
     "discord.js": "^14.7.1",
-    "libsodium": "^0.7.11"
+    "sodium-native": "^3.4.1",
+    "yt-dlp-wrap-plus": "^2.3.16"
   },
   "build": {
     "appId": "com.loudred.bot",

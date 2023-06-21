@@ -41,8 +41,11 @@ import {
   Channel,
   ThreadMemberFlagsBitField,
 } from "discord.js";
-import { done, wait } from "../index";
+import { done, wait, ytdl } from "../index";
 import { playerSettings, trackMetadata, trackStatus } from "../types";
+
+import * as fs from "fs";
+import { Readable } from "stream";
 
 export class AudioTools {
   static async createStreamFromYoutube(
@@ -50,27 +53,37 @@ export class AudioTools {
     ffmpeg_options_before: string = "",
     ffmpeg_options: string = ""
   ): Promise<AudioResource> {
-    let proc = spawn(
-      "yt-dlp",
-      [
-        "-f",
-        '"bestaudio/ba*/0"',
-        "-o",
-        "-",
-        "--external-downloader",
-        "ffmpeg",
-        "--external-downloader-args",
-        `ffmpeg_i1:"-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 ${ffmpeg_options_before}"`,
-        "--external-downloader-args",
-        `ffmpeg:"-f opus -c:a libopus ${ffmpeg_options}"`,
-        query,
-      ],
-      { shell: true, stdio: ["pipe", "pipe", "inherit"] }
+    const ye = new Readable({ read(size) {} });
+
+    const stream = ytdl.execStream([
+      "-o",
+      "-",
+      "-f",
+      "bestaudio/ba*/0",
+      "--external-downloader",
+      "ffmpeg",
+      "--external-downloader-args",
+      `ffmpeg_i1:-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 ${ffmpeg_options_before}`,
+      "--external-downloader-args",
+      `ffmpeg:-f opus -c:a libopus ${ffmpeg_options}`,
+      query,
+    ]);
+
+    stream.on("data", (x) => {
+      ye.push(x);
+    });
+
+    stream.on("error", (e) => {
+      console.error(e);
+    });
+
+    stream.on("ytDlpEvent", (eventType, eventData) =>
+      console.log("[ytdl] - " + eventType, eventData)
     );
 
-    const { stream, type } = await demuxProbe(proc.stdout);
+    const { type } = await demuxProbe(ye);
 
-    const resource = createAudioResource(proc.stdout, {
+    const resource = createAudioResource(ye, {
       inlineVolume: false,
       inputType: type,
     });
@@ -80,9 +93,13 @@ export class AudioTools {
 
   static async getMetadata(query: string): Promise<trackMetadata[]> {
     const filteredQuery = query.replace("'", "");
-    const { stdout, stderr } = await exec(
-      `yt-dlp --yes-playlist --flat-playlist --print pre_process:\'{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration)j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}\' '${filteredQuery}'`
-    );
+    const stdout = await ytdl.execPromise([
+      "--yes-playlist",
+      "--flat-playlist",
+      "--print",
+      `pre_process:{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration)j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}`,
+      filteredQuery,
+    ]);
     const videos = stdout.trim().split(/\r\n|\r|\n/);
     let jsonvideos: trackMetadata[] = [];
     videos.forEach((video: string) => {
