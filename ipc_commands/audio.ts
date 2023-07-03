@@ -96,14 +96,20 @@ export class AudioTools {
     const stdout = await ytdl.execPromise([
       "--yes-playlist",
       "--flat-playlist",
+      "--output-na-placeholder",
+      "YTDL_NOT_AVALIABLE",
       "--print",
-      `pre_process:{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration)j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}`,
+      `pre_process:{"id": %(id)j, "title": %(title)j, "upload_date": %(upload_date)j, "channel": %(channel)j, "duration_string": %(duration_string)j, "duration": %(duration|"NA")j, "view_count": %(view_count)j, "playlist_id": %(playlist_id)j, "playlist_title": %(playlist_title)j, "playlist_count": %(playlist_count)j, "playlist_index": %(playlist_index)j, "webpage_url_domain": %(webpage_url_domain)j, "original_url": %(original_url)j}`,
       filteredQuery,
     ]);
     const videos = stdout.trim().split(/\r\n|\r|\n/);
     let jsonvideos: trackMetadata[] = [];
     videos.forEach((video: string) => {
-      jsonvideos.push(JSON.parse(video) as trackMetadata);
+      let cu = video.replace(
+        new RegExp("YTDL_NOT_AVALIABLE", "g"),
+        '"unknown"'
+      );
+      jsonvideos.push(JSON.parse(cu) as trackMetadata);
     });
     return jsonvideos;
   }
