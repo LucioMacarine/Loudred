@@ -17,15 +17,15 @@
   "homepage": "https://github.com/LucioMacarine/Loudred",
   "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "^25.2.0",
-    "less": "^4.1.3",
-    "typescript": "^4.9.5"
+    "electron": "^28.2.1",
+    "less": "^4.2.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.14.0",
-    "discord.js": "^14.11.0",
+    "@discordjs/voice": "^0.16.1",
+    "discord.js": "^14.14.1",
     "tweetnacl": "^1.0.3",
-    "yt-dlp-wrap-plus": "^2.3.16"
+    "yt-dlp-wrap-plus": "^2.3.18"
   },
   "build": {
     "appId": "com.loudred.bot",
